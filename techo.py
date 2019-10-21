@@ -6,11 +6,11 @@ bot = telebot.TeleBot("945450664:AAGoBI6DH6eC5q4kJCuToLI8d1IsasIaTB8")
 
 @bot.message_handler(content_types=['text'])
 def send_echo(message):
-    observation = owm.weather_at_place(massage.text)
+    observation = owm.weather_at_place(message.text)
     w = observation.get_weather()
     temp = w.get_temperature('celsius')["temp"]
 
-    answer = "В городе " + massage.text + " cейчас " + w.get_detailed_status() + "\n"
+    answer = "В городе " + message.text + " cейчас " + w.get_detailed_status() + "\n"
     answer += "Температура сейчас около " + str(temp) + "\n\n"
 
     if temp < 10:
@@ -21,6 +21,6 @@ def send_echo(message):
         answer += "Температура нормальная, можно выпить по пиву"
 
 
-    bot.send_massage(massage.chat.id, answer)
+    bot.send_message(message.chat.id, answer)
 
 bot.polling( none_stop  = True)	
